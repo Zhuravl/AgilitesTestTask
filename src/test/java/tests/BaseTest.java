@@ -3,14 +3,14 @@ package tests;
 import features.SliderFeature;
 import org.testng.annotations.*;
 import utils.TestContext;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Contains base test methods
  */
 public abstract class BaseTest {
 
-    protected static Logger log = TestContext.getLogger();
+    static Logger log = TestContext.getLogger();
     SliderFeature sliderFeature;
 
     @BeforeSuite
@@ -28,9 +28,9 @@ public abstract class BaseTest {
         log.info("Finish tests execution");
         TestContext.closeDriver();
 
-        log.info("Close server");
+        log.info("Stop server");
         TestContext.stopServer();
-        log.info("Server has closed successfully");
+        log.info("Server has stopped successfully");
 
     }
 }

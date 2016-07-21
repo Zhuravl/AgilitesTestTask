@@ -1,83 +1,108 @@
 package components;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-
 /**
  * Class contains description of elements from support page
  */
 public class SupportPage extends BasePage{
 
-    @FindBy(id = "txtSearch")
-    private WebElement txtSearch;
+    //region Amount elements
+    @FindBy(xpath = ".//dd[@id='balance-holder']/span")
+    private WebElement balanceView;
 
-    @FindBy(xpath = "//div[contains(@class, 'newlikes')]")
-    private List<WebElement> likeDislikeElements;
+    @FindBy(id = "amount")
+    private WebElement amountField;
 
-    @FindBy(id = "supportFrame")
-    private WebElement outerFrame;
+    @FindBy(xpath = ".//a[@data-bind='click: doPayment']")
+    private WebElement paymentButton;
 
-    @FindBy(xpath = "//div[@id='nR_WidgetContainer']/iframe[contains(@id, 'nanoRep_frame_embed_')]")
-    private WebElement innerFrame;
+    @FindBy(xpath = ".//a[@data-bind='click: doReset']")
+    private WebElement resetButton;
 
-    @FindBy(xpath = "//div[@id='searchSuggestions']/div")
-    private List<WebElement> allSuggestions;
+    //endregion
 
-    public void enterRequest(String text){
-        navigateInsideFrames();
-        typeInto(txtSearch, text);
-        returnToDefaultFrame();
+    //region Slider elements
+    @FindBy(xpath = ".//div[@class='decrease']/a")
+    private WebElement decreaseButton;
+
+    @FindBy(xpath = ".//div[@class='increase']/a")
+    private WebElement increaseButton;
+
+    @FindBy(xpath = ".//*[@class='tarriff-info']/a")
+    private WebElement purchaseButton;
+
+    @FindBy(xpath = ".//div[@class='main-offer-container line']//div[@class='tariff']//div[@class='time']/strong")
+    private WebElement newTarifTimeValue;
+
+    @FindBy(xpath = ".//div[@class='main-offer-container line']//div[@class='tariff']//div[@class='speed']/strong")
+    private WebElement newTarifSpeedValue;
+
+    @FindBy(xpath = ".//div[@class='main-offer-container line']//div[@class='tariff']//div[@class='cost']/strong")
+    private WebElement newTarifCostValue;
+
+    @FindBy(xpath = ".//div[@class='hint hint_pos_current-conditions']//div[@class='tariff unavailable']//div[@class='time']/strong")
+    private WebElement currentTarifTimeValue;
+
+    @FindBy(xpath = ".//div[@class='hint hint_pos_current-conditions']//div[@class='tariff unavailable']//div[@class='speed']/strong")
+    private WebElement currentTariffSpeedValue;
+
+    @FindBy(xpath = ".//div[@class='hint hint_pos_current-conditions']//div[@class='tariff unavailable']//div[@class='cost no-arrow']/strong")
+    private WebElement currentTariffCostValue;
+    //endregion
+
+    public void clickReset() {
+        resetButton.click();
     }
 
-    public void navigateToPage(String url) {
-        getToUrl(url);
+    public void typeAmount(Integer amount) {
+        log.info("Type text '" + amount + "' into " + newTarifCostValue.toString());
+        amountField.clear();
+        amountField.sendKeys(amount.toString());
     }
 
-    public void selectSuggestion(String suggestion){
-        navigateInsideFrames();
-
-        for (WebElement s : allSuggestions) {
-            if (s.getText().equals(suggestion)) {
-                s.click();
-                break;
-            }
-        }
-
-        returnToDefaultFrame();
+    public void clickPayment() {
+        log.info("Click " + paymentButton.toString());
+        paymentButton.click();
     }
 
-    public String getLastLikeDislikeValue() {
-        WebElement element = getLastLikeDislikeElement();
-        if (element != null) {
-            return element.getText();
-        } else {
-            return null;
-        }
+    public int getNewTariffCost() {
+        log.info("Get text from " + newTarifCostValue.toString());
+        return Integer.parseInt(newTarifCostValue.getText());
     }
 
-    public void scrollToLastLikeDislike() {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        Integer lastElementYLocation = getLastLikeDislikeElement().getLocation().getY();
-        returnToDefaultFrame();
-        js.executeScript("function f() {window.scrollTo(0, " + lastElementYLocation.toString() + ");} f()");
+    public void clickIncrease() {
+        log.info("Click " + increaseButton.toString());
+        increaseButton.click();
     }
 
-    private void navigateInsideFrames(){
-        returnToDefaultFrame();
-        switchToFrame(outerFrame);
-        switchToFrame(innerFrame);
+    public void clickDecrease() {
+        log.info("Click " + decreaseButton.toString());
+        decreaseButton.click();
     }
 
-    private WebElement getLastLikeDislikeElement() {
-        navigateInsideFrames();
-        List<WebElement> list = likeDislikeElements;
-        if (list.size() > 0) {
-            return list.get(list.size() - 1);
-        } else {
-            return null;
-        }
+    public void clickPurchase() {
+        log.info("Click " + purchaseButton.toString());
+        purchaseButton.click();
+    }
+
+    public int getBalanceValue() {
+        log.info("Get balance from " + balanceView.toString());
+        return Integer.parseInt(balanceView.getText());
+    }
+
+    public int getCurrentTariffTimeValue() {
+        log.info("Get current tariff time");
+        return Integer.parseInt(currentTarifTimeValue.getText());
+    }
+
+    public String getCurrentTariffSpeedValue() {
+        log.info("Get current tariff speed");
+        return currentTariffSpeedValue.getText();
+    }
+
+    public int getCurrentTariffCostValue() {
+        log.info("Get current tariff cost");
+        return Integer.parseInt(currentTariffCostValue.getText());
     }
 }
