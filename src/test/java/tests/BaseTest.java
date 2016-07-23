@@ -15,9 +15,7 @@ public abstract class BaseTest {
 
     @BeforeSuite
     public void setUp() {
-        log.info("Start server");
         TestContext.startServer();
-        log.info("Server has started successfully");
 
         log.info("Start tests execution");
         sliderFeature = new SliderFeature();
@@ -28,9 +26,6 @@ public abstract class BaseTest {
         log.info("Finish tests execution");
         TestContext.closeDriver();
 
-        log.info("Stop server");
         TestContext.stopServer();
-        log.info("Server has stopped successfully");
-
     }
 }

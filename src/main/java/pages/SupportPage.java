@@ -1,4 +1,4 @@
-package components;
+package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,40 +55,50 @@ public class SupportPage extends BasePage{
         resetButton.click();
     }
 
-    public void typeAmount(Integer amount) {
-        log.info("Type text '" + amount + "' into " + newTarifCostValue.toString());
+    public void typeAmount(String amount) {
+        log.info("Type text '" + amount + "'.");
         amountField.clear();
-        amountField.sendKeys(amount.toString());
+        amountField.sendKeys(amount);
     }
 
     public void clickPayment() {
-        log.info("Click " + paymentButton.toString());
+        log.info("Click on element");
         paymentButton.click();
     }
 
-    public int getNewTariffCost() {
-        log.info("Get text from " + newTarifCostValue.toString());
+    public int getNewTariffCostValue() {
+        log.info("Get new tariff cost");
         return Integer.parseInt(newTarifCostValue.getText());
     }
 
+    public int getNewTariffTimeValue() {
+        log.info("Get new tariff time");
+        return Integer.parseInt(newTarifTimeValue.getText());
+    }
+
+    public String getNewTariffSpeedValue() {
+        log.info("Get new tariff speed");
+        return newTarifSpeedValue.getText();
+    }
+
     public void clickIncrease() {
-        log.info("Click " + increaseButton.toString());
+        log.info("Click Increase");
         increaseButton.click();
     }
 
     public void clickDecrease() {
-        log.info("Click " + decreaseButton.toString());
+        log.info("Click Decrease");
         decreaseButton.click();
     }
 
     public void clickPurchase() {
-        log.info("Click " + purchaseButton.toString());
+        log.info("Click Purchase");
         purchaseButton.click();
     }
 
-    public int getBalanceValue() {
-        log.info("Get balance from " + balanceView.toString());
-        return Integer.parseInt(balanceView.getText());
+    public String getBalanceValue() {
+        log.info("Get balance");
+        return balanceView.getText();
     }
 
     public int getCurrentTariffTimeValue() {

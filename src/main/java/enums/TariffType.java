@@ -28,7 +28,7 @@ public enum TariffType {
     T10000(30, "10000", 1250),
     T12000(30, "12000", 1300),
     T15000(30, "15000", 1350),
-    TMax(30, "Μΰκρ", 1400);
+    TMax(30, "ΠΠ°ΠΊΡ", 1400);
 
     private int time;
     private String speed;
