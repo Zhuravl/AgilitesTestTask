@@ -32,87 +32,142 @@ public class SupportPage extends BasePage{
     @FindBy(xpath = ".//*[@class='tarriff-info']/a")
     private WebElement purchaseButton;
 
-    @FindBy(xpath = ".//div[@class='main-offer-container line']//div[@class='tariff']//div[@class='time']/strong")
+    @FindBy(xpath = "//div[@class='tariff']//div[@class='time']/strong")
     private WebElement newTarifTimeValue;
 
-    @FindBy(xpath = ".//div[@class='main-offer-container line']//div[@class='tariff']//div[@class='speed']/strong")
+    @FindBy(xpath = "//div[@class='tariff']//div[@class='speed']/strong")
     private WebElement newTarifSpeedValue;
 
-    @FindBy(xpath = ".//div[@class='main-offer-container line']//div[@class='tariff']//div[@class='cost']/strong")
+    @FindBy(xpath = "//div[@class='tariff']//div[@class='cost']/strong")
     private WebElement newTarifCostValue;
 
-    @FindBy(xpath = ".//div[@class='hint hint_pos_current-conditions']//div[@class='tariff unavailable']//div[@class='time']/strong")
+    @FindBy(xpath = "//div[@class='tariff unavailable']//div[@class='time']/strong")
     private WebElement currentTarifTimeValue;
 
-    @FindBy(xpath = ".//div[@class='hint hint_pos_current-conditions']//div[@class='tariff unavailable']//div[@class='speed']/strong")
+    @FindBy(xpath = "//div[@class='tariff unavailable']//div[@class='speed']/strong")
     private WebElement currentTariffSpeedValue;
 
-    @FindBy(xpath = ".//div[@class='hint hint_pos_current-conditions']//div[@class='tariff unavailable']//div[@class='cost no-arrow']/strong")
+    @FindBy(xpath = "//div[@class='tariff unavailable']//div[@class='cost no-arrow']/strong")
     private WebElement currentTariffCostValue;
     //endregion
 
+    /**
+     * Clicks Reset button
+     */
     public void clickReset() {
+        log.info("Click Reset");
         resetButton.click();
     }
 
+    /**
+     * Types text into Amount field
+     * @param amount - text to type
+     */
     public void typeAmount(String amount) {
         log.info("Type text '" + amount + "'.");
         amountField.clear();
         amountField.sendKeys(amount);
     }
 
+    /**
+     * Clicks Payment button
+     */
     public void clickPayment() {
-        log.info("Click on element");
+        log.info("Click Payment");
         paymentButton.click();
     }
 
+    /**
+     * Returns new tariff cost
+     */
     public int getNewTariffCostValue() {
         log.info("Get new tariff cost");
-        return Integer.parseInt(newTarifCostValue.getText());
+        String s = newTarifCostValue.getText();
+        log.info("New tariff cost - " + s);
+        return Integer.parseInt(s);
     }
 
+    /**
+     * Returns new tariff time
+     */
     public int getNewTariffTimeValue() {
         log.info("Get new tariff time");
-        return Integer.parseInt(newTarifTimeValue.getText());
+        String s = newTarifTimeValue.getText();
+        log.info("New tariff time - " + s);
+        return Integer.parseInt(s);
     }
 
+    /**
+     * Returns new tariff speed
+     */
     public String getNewTariffSpeedValue() {
         log.info("Get new tariff speed");
-        return newTarifSpeedValue.getText();
+        String s = newTarifSpeedValue.getText();
+        log.info("New tariff speed - " + s);
+        return s;
     }
 
+    /**
+     * Clicks Increase button
+     */
     public void clickIncrease() {
         log.info("Click Increase");
         increaseButton.click();
     }
 
+    /**
+     * Clicks Decrease button
+     */
     public void clickDecrease() {
         log.info("Click Decrease");
         decreaseButton.click();
     }
 
+    /**
+     * Clicks Purchase button
+     */
     public void clickPurchase() {
         log.info("Click Purchase");
         purchaseButton.click();
     }
 
+    /**
+     * Returns balance
+     */
     public String getBalanceValue() {
         log.info("Get balance");
-        return balanceView.getText();
+        String s = balanceView.getText();
+        log.info("Balance - " + s);
+        return s;
     }
 
+    /**
+     * Returns current tariff time
+     */
     public int getCurrentTariffTimeValue() {
         log.info("Get current tariff time");
-        return Integer.parseInt(currentTarifTimeValue.getText());
+        String s = currentTarifTimeValue.getText();
+        log.info("Current tariff time - " + s);
+        return Integer.parseInt(s);
     }
 
+    /**
+     * Returns current tariff speed
+     */
     public String getCurrentTariffSpeedValue() {
         log.info("Get current tariff speed");
-        return currentTariffSpeedValue.getText();
+        String s = currentTariffSpeedValue.getText();
+        log.info("Current tariff speed - " + s);
+        return s;
     }
 
+    /**
+     * Returns current tariff cost
+     */
     public int getCurrentTariffCostValue() {
         log.info("Get current tariff cost");
-        return Integer.parseInt(currentTariffCostValue.getText());
+        String s = currentTariffCostValue.getText();
+        log.info("Current tariff cost - " + s);
+        return Integer.parseInt(s);
     }
 }

@@ -3,3 +3,4 @@
 sliderDB
 derby.log
 /log*
+/target

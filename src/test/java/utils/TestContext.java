@@ -14,13 +14,15 @@ import org.apache.logging.log4j.Logger;
  */
 public class TestContext {
     private static WebDriver driver;
-
-    private static Logger log = LogManager.getLogger(TestContext.class);
-
+    private static final Logger log = LogManager.getLogger(TestContext.class);
     private static final String APP_NAME = "test-slider-1.0.0-SNAPSHOT";
+
     public static final long DEFAULT_WAIT_TIME = 1000;
     public static final String SLIDER_PAGE_URL = "http://localhost:4567/index.html";
 
+    /**
+     * Creates and returns WebDriver instance
+     */
     public static WebDriver getDriver(){
         if (driver == null){
             log.info("Create driver");
@@ -33,6 +35,9 @@ public class TestContext {
         return driver;
     }
 
+    /**
+     * Closes WebDriver
+     */
     public static void closeDriver(){
         if (driver != null){
             log.info("Close driver");
@@ -40,11 +45,17 @@ public class TestContext {
         }
     }
 
+    /**
+     * Returns Logger instance
+     */
     public static Logger getLogger() {
         return log;
     }
 
-    public static void startServer(){
+    /**
+     * Starts target application
+     */
+    public static void startTargetApp(){
         try {
             log.info("Start server");
             Runtime.getRuntime().exec("java -jar " + APP_NAME + ".jar");
@@ -55,7 +66,10 @@ public class TestContext {
         }
     }
 
-    public static void stopServer(){
+    /**
+     * Stops target application
+     */
+    public static void stopTargetApp(){
         try {
             log.info("Stop server");
             Runtime.getRuntime().exec("taskkill /IM java.exe /T /F");

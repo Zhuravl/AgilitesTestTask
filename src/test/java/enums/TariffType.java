@@ -40,18 +40,33 @@ public enum TariffType {
         this.cost = cost;
     }
 
+    /**
+     * Returns tariff time
+     */
     public int getTime(){
         return time;
     }
 
+    /**
+     * Returns tariff speed
+     */
     public String getSpeed(){
         return speed;
     }
 
+    /**
+     * Returns tariff cost
+     */
     public int getCost(){
         return cost;
     }
 
+    /**
+     * Returns tariff by parameters
+     * @param time - tariff time
+     * @param speed - tariff speed
+     * @param cost - tariff cost
+     */
     public static TariffType getTariffType(int time, String speed, int cost){
         TariffType tariffTypeResult = null;
 
